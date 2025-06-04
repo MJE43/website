@@ -57,10 +57,10 @@ export function TestimonialCarousel({
             style={{ transform: `translateX(-${activeIndex * 100}%)` }}
           >
             {testimonials.map((testimonial, index) => (
-              <div key={index} className="w-full flex-shrink-0 px-4">
+              <div key={index} className="w-full shrink-0 px-4">
                 <Card className="overflow-hidden border-none bg-transparent shadow-none">
                   <CardContent className="flex flex-col items-center p-6 text-center">
-                    <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-purple-600/10 to-blue-600/10">
+                    <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-linear-to-br from-purple-600/10 to-blue-600/10">
                       <Quote className="h-8 w-8 text-gradient" />
                     </div>
                     <p className="mb-8 text-xl">{testimonial.quote}</p>
@@ -95,7 +95,7 @@ export function TestimonialCarousel({
               className={cn(
                 "h-2 w-2 rounded-full transition-all",
                 activeIndex === index
-                  ? "w-6 bg-gradient-to-r from-purple-600 to-blue-600"
+                  ? "w-6 bg-linear-to-r from-purple-600 to-blue-600"
                   : "bg-muted"
               )}
               onClick={() => setActiveIndex(index)}

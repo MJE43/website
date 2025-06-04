@@ -1,222 +1,264 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
-import TestimonialCard from '../components/ui/TestimonialCard';
-import AnimatedCounter from '../components/ui/AnimatedCounter';
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import {
+  ArrowRight,
+  Calendar,
+  DollarSign,
+  Phone,
+  Star,
+  TrendingUp,
+  Users,
+  Zap,
+  MapPin,
+  Clock,
+  Target,
+  Award,
+} from "lucide-react";
 
-interface CaseStudy {
-  id: number;
-  title: string;
-  business: string;
-  industry: string;
-  challenge: string;
-  solution: string;
-  results: string[];
-  image: string;
-  testimonial: {
-    quote: string;
-    name: string;
-    position: string;
-  };
-}
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Badge } from "@/components/ui/badge";
+import { BeforeAfterSlider } from "@/components/sections/before-after-slider";
+import { ResultsFilter } from "@/components/sections/results-filter";
+import { MetricsVisualization } from "@/components/sections/metrics-visualization";
 
-const ResultsPage: React.FC = () => {
-  const caseStudies: CaseStudy[] = [
-    {
-      id: 1,
-      title: "Local Restaurant Increases Online Orders by 120%",
-      business: "Desert Bloom Cafe",
-      industry: "Restaurant",
-      challenge: "Desert Bloom Cafe had a basic website that wasn't mobile-friendly and lacked online ordering capabilities. Their visibility in local search was poor, resulting in missed opportunities for new customers.",
-      solution: "We designed a responsive website with integrated online ordering, optimized for local SEO, and implemented a content strategy highlighting their unique farm-to-table menu.",
-      results: [
-        "120% increase in online orders",
-        "45% increase in organic search traffic",
-        "First page ranking for 'Tucson organic restaurant'",
-        "35% increase in new customer acquisition"
-      ],
-      image: "https://images.pexels.com/photos/1484516/pexels-photo-1484516.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-      testimonial: {
-        quote: "Working with Webundance completely transformed our business. Not only do we have a beautiful website that showcases our food, but we're actually getting found online and taking more orders than ever before.",
-        name: "Michael Ramirez",
-        position: "Owner"
-      }
-    },
-    {
-      id: 2,
-      title: "Fitness Studio Grows Membership by 85%",
-      business: "Tucson Fitness Studio",
-      industry: "Health & Fitness",
-      challenge: "Tucson Fitness Studio had an outdated website that wasn't generating leads. They were struggling to compete with larger fitness chains in the area and needed a digital strategy to highlight their personalized approach.",
-      solution: "We developed a modern website with class scheduling, membership sign-up, and testimonial features. We implemented local SEO and created targeted content marketing to reach their ideal customers.",
-      results: [
-        "85% increase in new memberships",
-        "65% more leads through contact form",
-        "3x increase in class bookings online",
-        "First page ranking for 'personal training Tucson'"
-      ],
-      image: "https://images.pexels.com/photos/3768916/pexels-photo-3768916.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-      testimonial: {
-        quote: "Since launching our new website and implementing the SEO strategy, we've seen a dramatic increase in inquiries and new memberships. The website perfectly captures our unique approach and has helped us stand out from the competition.",
-        name: "Sarah Johnson",
-        position: "Owner"
-      }
-    },
-    {
-      id: 3,
-      title: "Handcrafted Goods Store Increases E-commerce Sales by 150%",
-      business: "Sonoran Crafts",
-      industry: "Retail",
-      challenge: "Sonoran Crafts had a poorly performing e-commerce site with low conversion rates and high cart abandonment. Their products weren't being found in online searches, limiting their reach beyond local customers.",
-      solution: "We rebuilt their e-commerce platform with optimized product pages, streamlined checkout, and improved product photography. We implemented an SEO strategy focused on handcrafted goods and local artisans.",
-      results: [
-        "150% increase in online sales",
-        "40% reduction in cart abandonment",
-        "75% increase in organic traffic",
-        "Expanded customer base to nationwide"
-      ],
-      image: "https://images.pexels.com/photos/5709665/pexels-photo-5709665.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2",
-      testimonial: {
-        quote: "Our e-commerce sales have exploded since working with Webundance. The new website is beautiful and really showcases our products. We're now shipping to customers across the country, which was something we never thought possible for our small shop.",
-        name: "Jennifer Williams",
-        position: "Founder"
-      }
-    }
-  ];
+export default function ResultsPage() {
+  const [selectedIndustry, setSelectedIndustry] = useState("all");
+  const [selectedMetric, setSelectedMetric] = useState("revenue");
 
-  const additionalTestimonials = [
-    {
-      quote: "Webundance took the time to truly understand our business before making any recommendations. The results speak for themselves - our website now generates 5-7 quality leads every week.",
-      name: "David Martinez",
-      company: "Southwest Home Services",
-      rating: 5
-    },
-    {
-      quote: "We've tried working with other web developers in the past, but none delivered the results that Webundance has. They're truly focused on business outcomes, not just pretty designs.",
-      name: "Lisa Thompson",
-      company: "Tucson Family Law",
-      rating: 5
-    },
-    {
-      quote: "The SEO work has transformed our business. We're now ranking on the first page for all our target keywords, and the traffic is converting into real customers.",
-      name: "Robert Jackson",
-      company: "Sonoran Solar Solutions",
-      rating: 5
-    },
-    {
-      quote: "We appreciated the data-driven approach to our website redesign. Every decision was backed by research and focused on improving our conversion rates.",
-      name: "Amanda Lewis",
-      company: "Desert Pet Care",
-      rating: 5
-    },
-    {
-      quote: "Our new website perfectly captures our brand and has significantly improved our professional image. We've received countless compliments from clients.",
-      name: "Thomas Wilson",
-      company: "Architect Associates",
-      rating: 5
-    }
-  ];
+  const filteredCaseStudies =
+    selectedIndustry === "all"
+      ? caseStudies
+      : caseStudies.filter(
+          (study) => study.industry.toLowerCase() === selectedIndustry
+        );
 
   return (
     <>
       {/* Hero Section */}
-      <section className="pt-32 pb-20 md:pt-40 md:pb-24 bg-linear-to-br from-blue-50 to-indigo-50">
-        <div className="container">
-          <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">Proven Results for Small Businesses</h1>
-            <p className="text-xl text-text-body">
-              Real clients, real growth, real impact
-            </p>
-          </div>
+      <section className="relative overflow-hidden bg-gradient-to-br from-slate-50 to-white py-20 dark:from-gray-900 dark:to-gray-950 md:py-28">
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute -left-[20%] top-[20%] h-[600px] w-[600px] rounded-full bg-purple-600/5 blur-3xl"></div>
+          <div className="absolute -right-[20%] bottom-[20%] h-[500px] w-[500px] rounded-full bg-blue-600/5 blur-3xl"></div>
         </div>
-      </section>
 
-      {/* Results Summary */}
-      <section className="py-16 bg-white">
-        <div className="container">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-6">Our Impact By The Numbers</h2>
-            <p className="text-lg text-text-body max-w-3xl mx-auto">
-              We measure success through real business results. Here's what we've achieved for our clients on average:
+        <div className="container relative">
+          <div className="mx-auto max-w-4xl text-center">
+            <div className="mb-6 inline-flex items-center rounded-full border border-border bg-background px-4 py-2 text-sm">
+              <Award className="mr-2 h-4 w-4 text-purple-600" />
+              <span className="font-medium">
+                Proven Results for Local Businesses
+              </span>
+            </div>
+
+            <h1 className="mb-6 text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
+              Real <span className="text-gradient">Results</span> from Real
+              Businesses
+            </h1>
+
+            <p className="mb-8 text-xl text-muted-foreground md:text-2xl">
+              See how we've helped local businesses like yours grow their
+              customer base, increase revenue, and dominate their local markets.
             </p>
-          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div className="card text-center">
-              <AnimatedCounter end={35} suffix="%" className="mb-3" />
-              <p className="text-lg font-medium">Increase in Website Traffic</p>
+            <div className="mb-12 flex flex-wrap justify-center gap-4">
+              <Button
+                asChild
+                size="lg"
+                className="bg-gradient-to-r from-purple-600 to-blue-600 text-white"
+              >
+                <Link to="/contact">Get Similar Results</Link>
+              </Button>
+              <Button asChild variant="outline" size="lg">
+                <a href="#case-studies">
+                  Explore Case Studies
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </a>
+              </Button>
             </div>
-            <div className="card text-center">
-              <AnimatedCounter end={48} suffix="%" className="mb-3" />
-              <p className="text-lg font-medium">Improved Conversion Rates</p>
-            </div>
-            <div className="card text-center">
-              <AnimatedCounter end={65} suffix="%" className="mb-3" />
-              <p className="text-lg font-medium">Better Search Rankings</p>
-            </div>
-            <div className="card text-center">
-              <AnimatedCounter end={42} suffix="%" className="mb-3" />
-              <p className="text-lg font-medium">Increase in Revenue</p>
-            </div>
-          </div>
-        </div>
-      </section>
 
-      {/* Case Studies */}
-      <section className="section bg-bg-light">
-        <div className="container">
-          <div className="section-title">
-            <h2>Case Studies</h2>
-            <p>Real-world examples of how we've helped businesses grow</p>
-          </div>
-
-          <div className="space-y-16">
-            {caseStudies.map((study, index) => (
-              <div key={study.id} className="card overflow-hidden">
-                <div className={`grid grid-cols-1 lg:grid-cols-2 gap-8 ${
-                  index % 2 === 1 ? 'lg:flex-row-reverse' : ''
-                }`}>
-                  <div className="order-2 lg:order-1">
-                    <div className="inline-block px-3 py-1 bg-primary/10 text-primary rounded-full text-sm font-medium mb-4">
-                      {study.industry}
-                    </div>
-                    <h3 className="text-2xl font-bold mb-4">{study.title}</h3>
-                    <p className="text-lg font-medium text-primary mb-6">{study.business}</p>
-                    
-                    <div className="mb-6">
-                      <h4 className="text-lg font-semibold mb-2">The Challenge</h4>
-                      <p className="text-text-body mb-4">{study.challenge}</p>
-                      
-                      <h4 className="text-lg font-semibold mb-2">Our Solution</h4>
-                      <p className="text-text-body mb-4">{study.solution}</p>
-                      
-                      <h4 className="text-lg font-semibold mb-2">The Results</h4>
-                      <ul className="space-y-2">
-                        {study.results.map((result, i) => (
-                          <li key={i} className="flex items-start">
-                            <svg className="w-5 h-5 text-primary mt-1 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                              <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd"></path>
-                            </svg>
-                            <span>{result}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                    
-                    <blockquote className="border-l-4 border-primary pl-4 italic text-text-body">
-                      "{study.testimonial.quote}"
-                      <footer className="mt-2 not-italic">
-                        <strong>{study.testimonial.name}</strong>, {study.testimonial.position}
-                      </footer>
-                    </blockquote>
+            {/* Aggregate Results */}
+            <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
+              {aggregateResults.map((result) => (
+                <div key={result.label} className="text-center">
+                  <div className="mb-2 inline-flex rounded-full bg-gradient-to-br from-purple-600/10 to-blue-600/10 p-3">
+                    <result.icon className="h-6 w-6 text-gradient" />
                   </div>
-                  
-                  <div className="order-1 lg:order-2">
-                    <img 
-                      src={study.image} 
-                      alt={study.title}
-                      className="w-full h-full object-cover rounded-lg shadow-lg"
-                      style={{ maxHeight: '500px' }}
-                    />
+                  <div className="text-2xl font-bold text-gradient md:text-3xl">
+                    {result.value}
+                  </div>
+                  <div className="text-sm text-muted-foreground">
+                    {result.label}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Interactive Metrics */}
+      <section className="py-20 md:py-28">
+        <div className="container">
+          <div className="mx-auto max-w-3xl text-center">
+            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
+              Results That <span className="text-gradient">Matter</span>
+            </h2>
+            <p className="mt-4 text-xl text-muted-foreground">
+              We track the metrics that actually impact your bottom line.
+            </p>
+          </div>
+
+          <div className="mt-16">
+            <MetricsVisualization
+              selectedMetric={selectedMetric}
+              onMetricChange={setSelectedMetric}
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Case Studies */}
+      <section id="case-studies" className="bg-muted/30 py-20 md:py-28">
+        <div className="container">
+          <div className="mx-auto max-w-3xl text-center">
+            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
+              Featured <span className="text-gradient">Success Stories</span>
+            </h2>
+            <p className="mt-4 text-xl text-muted-foreground">
+              Deep dive into how we transformed these local businesses.
+            </p>
+          </div>
+
+          <div className="mt-16">
+            <ResultsFilter
+              selectedIndustry={selectedIndustry}
+              onIndustryChange={setSelectedIndustry}
+              caseStudies={caseStudies}
+            />
+          </div>
+
+          <div className="mt-12 grid gap-8 lg:grid-cols-2">
+            {filteredCaseStudies.slice(0, 4).map((study) => (
+              <Card
+                key={study.id}
+                className="group overflow-hidden transition-all hover:shadow-lg"
+              >
+                <div className="relative aspect-video overflow-hidden">
+                  <img
+                    src={study.image || "/placeholder.svg"}
+                    alt={study.business}
+                    className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                  <div className="absolute bottom-4 left-4 right-4">
+                    <Badge className="mb-2 bg-white/20 text-white">
+                      {study.industry}
+                    </Badge>
+                    <h3 className="text-xl font-bold text-white">
+                      {study.business}
+                    </h3>
+                    <p className="text-sm text-white/80">{study.location}</p>
+                  </div>
+                </div>
+
+                <CardContent className="p-6">
+                  <p className="mb-4 text-muted-foreground">
+                    {study.challenge}
+                  </p>
+
+                  <div className="mb-6 grid grid-cols-2 gap-4">
+                    {study.keyMetrics.map((metric, index) => (
+                      <div key={index} className="text-center">
+                        <div className="text-2xl font-bold text-gradient">
+                          {metric.value}
+                        </div>
+                        <div className="text-sm text-muted-foreground">
+                          {metric.label}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="mb-4 rounded-lg bg-green-50 p-4 dark:bg-green-900/20">
+                    <div className="flex items-center gap-2">
+                      <TrendingUp className="h-4 w-4 text-green-600" />
+                      <span className="font-medium text-green-700 dark:text-green-300">
+                        {study.primaryResult}
+                      </span>
+                    </div>
+                  </div>
+
+                  <Button asChild variant="outline" className="w-full">
+                    <Link to={`/results/${study.slug}`}>
+                      View Full Case Study
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </Link>
+                  </Button>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+
+          <div className="mt-12 text-center">
+            <Button asChild variant="outline">
+              <a href="#all-results">
+                View All Case Studies
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </a>
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* Before/After Showcase */}
+      <section className="py-20 md:py-28">
+        <div className="container">
+          <div className="mx-auto max-w-3xl text-center">
+            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
+              See the <span className="text-gradient">Transformation</span>
+            </h2>
+            <p className="mt-4 text-xl text-muted-foreground">
+              Compare the old websites with our beautiful, conversion-focused
+              designs.
+            </p>
+          </div>
+
+          <div className="mt-16 space-y-16">
+            {beforeAfterExamples.map((example) => (
+              <div key={example.id} className="mx-auto max-w-4xl">
+                <div className="mb-8 text-center">
+                  <h3 className="text-2xl font-bold">{example.business}</h3>
+                  <p className="text-muted-foreground">
+                    {example.industry} • {example.location}
+                  </p>
+                </div>
+
+                <BeforeAfterSlider
+                  beforeImage={example.beforeImage}
+                  afterImage={example.afterImage}
+                  beforeLabel="Old Website"
+                  afterLabel="New Website"
+                />
+
+                <div className="mt-8 grid gap-6 md:grid-cols-3">
+                  {example.improvements.map((improvement, index) => (
+                    <div key={index} className="text-center">
+                      <div className="mb-2 inline-flex rounded-full bg-gradient-to-br from-purple-600/10 to-blue-600/10 p-3">
+                        <improvement.icon className="h-6 w-6 text-gradient" />
+                      </div>
+                      <h4 className="font-medium">{improvement.title}</h4>
+                      <p className="text-sm text-muted-foreground">
+                        {improvement.description}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="mt-6 rounded-lg bg-gradient-to-r from-purple-600/10 to-blue-600/10 p-6 text-center">
+                  <div className="text-lg font-bold text-gradient">
+                    {example.result}
                   </div>
                 </div>
               </div>
@@ -225,47 +267,485 @@ const ResultsPage: React.FC = () => {
         </div>
       </section>
 
-      {/* Testimonials Grid */}
-      <section className="section bg-white">
+      {/* Results by Service */}
+      <section className="bg-muted/30 py-20 md:py-28">
         <div className="container">
-          <div className="section-title">
-            <h2>What Our Clients Say</h2>
-            <p>Feedback from businesses we've helped succeed</p>
+          <div className="mx-auto max-w-3xl text-center">
+            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
+              Results by <span className="text-gradient">Service</span>
+            </h2>
+            <p className="mt-4 text-xl text-muted-foreground">
+              See the specific impact of each service we provide.
+            </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {additionalTestimonials.map((testimonial, index) => (
-              <TestimonialCard
-                key={index}
-                quote={testimonial.quote}
-                name={testimonial.name}
-                company={testimonial.company}
-                rating={testimonial.rating}
-              />
+          <div className="mt-16">
+            <Tabs defaultValue="website-design" className="w-full">
+              <div className="mb-8 flex justify-center">
+                <TabsList className="grid w-full max-w-2xl grid-cols-2 lg:grid-cols-4">
+                  <TabsTrigger value="website-design">
+                    Website Design
+                  </TabsTrigger>
+                  <TabsTrigger value="local-seo">Local SEO</TabsTrigger>
+                  <TabsTrigger value="booking-system">
+                    Booking System
+                  </TabsTrigger>
+                  <TabsTrigger value="review-management">Reviews</TabsTrigger>
+                </TabsList>
+              </div>
+
+              {Object.entries(serviceResults).map(([key, service]) => (
+                <TabsContent key={key} value={key}>
+                  <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                    {service.results.map((result, index) => (
+                      <Card key={index}>
+                        <CardHeader>
+                          <div className="flex items-center gap-3">
+                            <div className="h-12 w-12 overflow-hidden rounded-full bg-muted">
+                              <img
+                                src={result.clientImage || "/placeholder.svg"}
+                                alt={result.client}
+                                className="h-full w-full object-cover"
+                              />
+                            </div>
+                            <div>
+                              <CardTitle className="text-lg">
+                                {result.client}
+                              </CardTitle>
+                              <p className="text-sm text-muted-foreground">
+                                {result.business}
+                              </p>
+                            </div>
+                          </div>
+                        </CardHeader>
+                        <CardContent>
+                          <div className="mb-4 text-center">
+                            <div className="text-3xl font-bold text-gradient">
+                              {result.improvement}
+                            </div>
+                            <div className="text-sm text-muted-foreground">
+                              {result.metric}
+                            </div>
+                          </div>
+                          <p className="text-sm text-muted-foreground">
+                            "{result.quote}"
+                          </p>
+                          <div className="mt-4 flex justify-center">
+                            {[...Array(5)].map((_, i) => (
+                              <Star
+                                key={i}
+                                className="h-4 w-4 fill-yellow-400 text-yellow-400"
+                              />
+                            ))}
+                          </div>
+                        </CardContent>
+                      </Card>
+                    ))}
+                  </div>
+                </TabsContent>
+              ))}
+            </Tabs>
+          </div>
+        </div>
+      </section>
+
+      {/* Industry Breakdown */}
+      <section className="py-20 md:py-28">
+        <div className="container">
+          <div className="mx-auto max-w-3xl text-center">
+            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
+              Success Across <span className="text-gradient">Industries</span>
+            </h2>
+            <p className="mt-4 text-xl text-muted-foreground">
+              We understand the unique challenges of different local business
+              types.
+            </p>
+          </div>
+
+          <div className="mt-16 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+            {industryBreakdown.map((industry) => (
+              <Card key={industry.name} className="text-center">
+                <CardContent className="p-6">
+                  <div className="mb-4 inline-flex rounded-full bg-gradient-to-br from-purple-600/10 to-blue-600/10 p-4">
+                    <industry.icon className="h-8 w-8 text-gradient" />
+                  </div>
+                  <h3 className="mb-2 text-xl font-bold">{industry.name}</h3>
+                  <p className="mb-4 text-muted-foreground">
+                    {industry.description}
+                  </p>
+
+                  <div className="mb-4 space-y-2">
+                    {industry.avgResults.map((result, index) => (
+                      <div key={index} className="flex justify-between">
+                        <span className="text-sm text-muted-foreground">
+                          {result.metric}
+                        </span>
+                        <span className="text-sm font-medium text-gradient">
+                          {result.value}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="text-sm text-muted-foreground">
+                    Based on {industry.clientCount} clients
+                  </div>
+                </CardContent>
+              </Card>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 bg-primary text-white">
+      {/* Guarantee Section */}
+      <section className="bg-gradient-to-br from-purple-600 to-blue-600 py-20 text-white md:py-28">
         <div className="container">
-          <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to See These Results for Your Business?</h2>
-            <p className="text-xl mb-8 text-white/90">
-              Let's discuss how our data-driven approach can help you achieve similar growth.
+          <div className="mx-auto max-w-3xl text-center">
+            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
+              We're So Confident, We Guarantee It
+            </h2>
+            <p className="mt-6 text-xl text-blue-100">
+              If you don't see measurable results within 90 days, we'll work for
+              free until you do.
             </p>
-            <NavLink to="/contact" className="inline-flex items-center bg-white text-primary hover:bg-white/90 px-8 py-3 rounded-full font-semibold transition-all duration-300 group">
-              Schedule a Free Consultation
-              <svg className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
-              </svg>
-            </NavLink>
+
+            <div className="mt-12 grid gap-8 md:grid-cols-3">
+              {guarantees.map((guarantee) => (
+                <div
+                  key={guarantee.title}
+                  className="rounded-lg bg-white/10 p-6"
+                >
+                  <div className="mb-4 inline-flex rounded-full bg-white/20 p-3">
+                    <guarantee.icon className="h-6 w-6" />
+                  </div>
+                  <h3 className="mb-2 text-lg font-bold">{guarantee.title}</h3>
+                  <p className="text-sm text-blue-100">
+                    {guarantee.description}
+                  </p>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-12">
+              <Button
+                asChild
+                size="lg"
+                className="bg-white text-purple-600 hover:bg-white/90"
+              >
+                <Link to="/contact">Start Your Success Story</Link>
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-20 md:py-28">
+        <div className="container">
+          <div className="mx-auto max-w-3xl text-center">
+            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
+              Ready to Join Our{" "}
+              <span className="text-gradient">Success Stories</span>?
+            </h2>
+            <p className="mt-4 text-xl text-muted-foreground">
+              Let's create a case study about your business next.
+            </p>
+
+            <div className="mt-8 flex flex-wrap justify-center gap-4">
+              <Button
+                asChild
+                size="lg"
+                className="bg-gradient-to-r from-purple-600 to-blue-600 text-white"
+              >
+                <Link to="/contact">Get Your Free Strategy Call</Link>
+              </Button>
+              <Button asChild variant="outline" size="lg">
+                <Link to="/process">
+                  Learn Our Process
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
+            </div>
+
+            <div className="mt-8 text-sm text-muted-foreground">
+              Free consultation • No obligation • Results guaranteed
+            </div>
           </div>
         </div>
       </section>
     </>
   );
+}
+
+// Data
+const aggregateResults = [
+  { value: "500+", label: "Businesses Helped", icon: Users },
+  { value: "300%", label: "Avg. Lead Increase", icon: TrendingUp },
+  { value: "$2.5M+", label: "Revenue Generated", icon: DollarSign },
+  { value: "4.9/5", label: "Client Satisfaction", icon: Star },
+];
+
+const caseStudies = [
+  {
+    id: 1,
+    business: "Rodriguez Plumbing",
+    industry: "Plumbing",
+    location: "Austin, TX",
+    challenge:
+      "Struggling to compete with larger plumbing companies and getting lost in search results.",
+    primaryResult: "Increased monthly revenue by 180% in 6 months",
+    keyMetrics: [
+      { value: "180%", label: "Revenue Increase" },
+      { value: "250%", label: "More Calls" },
+    ],
+    image: "/placeholder.svg?height=400&width=600",
+    slug: "rodriguez-plumbing",
+  },
+  {
+    id: 2,
+    business: "Bright Electric Co.",
+    industry: "Electrical",
+    location: "Phoenix, AZ",
+    challenge:
+      "No online presence and relying solely on word-of-mouth referrals.",
+    primaryResult: "Went from 0 to 50+ online leads per month",
+    keyMetrics: [
+      { value: "50+", label: "Monthly Leads" },
+      { value: "400%", label: "Business Growth" },
+    ],
+    image: "/placeholder.svg?height=400&width=600",
+    slug: "bright-electric",
+  },
+  {
+    id: 3,
+    business: "Bella Beauty Salon",
+    industry: "Beauty",
+    location: "Miami, FL",
+    challenge:
+      "High no-show rates and difficulty managing appointments efficiently.",
+    primaryResult: "Reduced no-shows by 70% with online booking",
+    keyMetrics: [
+      { value: "70%", label: "Fewer No-Shows" },
+      { value: "300%", label: "Online Bookings" },
+    ],
+    image: "/placeholder.svg?height=400&width=600",
+    slug: "bella-beauty",
+  },
+  {
+    id: 4,
+    business: "Wilson HVAC",
+    industry: "HVAC",
+    location: "Denver, CO",
+    challenge: "Seasonal business fluctuations and low customer retention.",
+    primaryResult: "Stabilized revenue with 40% repeat customer rate",
+    keyMetrics: [
+      { value: "40%", label: "Repeat Customers" },
+      { value: "150%", label: "Off-Season Revenue" },
+    ],
+    image: "/placeholder.svg?height=400&width=600",
+    slug: "wilson-hvac",
+  },
+];
+
+const beforeAfterExamples = [
+  {
+    id: 1,
+    business: "Mike's Auto Repair",
+    industry: "Automotive",
+    location: "Chicago, IL",
+    beforeImage: "/placeholder.svg?height=600&width=800",
+    afterImage: "/placeholder.svg?height=600&width=800",
+    improvements: [
+      {
+        title: "Mobile Optimized",
+        description: "Now works perfectly on all devices",
+        icon: Phone,
+      },
+      {
+        title: "Online Booking",
+        description: "Customers can schedule appointments 24/7",
+        icon: Calendar,
+      },
+      {
+        title: "Local SEO",
+        description: "Shows up first for local searches",
+        icon: MapPin,
+      },
+    ],
+    result: "200% increase in online appointments within 3 months",
+  },
+];
+
+const serviceResults = {
+  "website-design": {
+    results: [
+      {
+        client: "Sarah Johnson",
+        business: "Johnson Plumbing",
+        improvement: "300%",
+        metric: "More Website Visitors",
+        quote: "The new website is beautiful and actually brings in customers!",
+        clientImage: "/placeholder.svg?height=100&width=100",
+      },
+      {
+        client: "Mike Rodriguez",
+        business: "Rodriguez Electric",
+        improvement: "250%",
+        metric: "Increase in Calls",
+        quote: "We get calls every day now from people who found us online.",
+        clientImage: "/placeholder.svg?height=100&width=100",
+      },
+      {
+        client: "Lisa Chen",
+        business: "Chen's Hair Studio",
+        improvement: "400%",
+        metric: "Online Bookings",
+        quote: "The booking system has transformed how we manage appointments.",
+        clientImage: "/placeholder.svg?height=100&width=100",
+      },
+    ],
+  },
+  "local-seo": {
+    results: [
+      {
+        client: "Tom Wilson",
+        business: "Wilson HVAC",
+        improvement: "500%",
+        metric: "Google My Business Views",
+        quote:
+          "We're now the first result when people search for HVAC in our area.",
+        clientImage: "/placeholder.svg?height=100&width=100",
+      },
+      {
+        client: "Maria Garcia",
+        business: "Garcia Landscaping",
+        improvement: "200%",
+        metric: "Local Search Traffic",
+        quote: "Local SEO has been a game-changer for our business.",
+        clientImage: "/placeholder.svg?height=100&width=100",
+      },
+      {
+        client: "David Kim",
+        business: "Kim's Auto Body",
+        improvement: "350%",
+        metric: "Map Pack Appearances",
+        quote: "We show up in the map results for every relevant search now.",
+        clientImage: "/placeholder.svg?height=100&width=100",
+      },
+    ],
+  },
+  "booking-system": {
+    results: [
+      {
+        client: "Jennifer Lee",
+        business: "Zen Spa & Wellness",
+        improvement: "80%",
+        metric: "Booking Efficiency",
+        quote: "The online booking system has eliminated phone tag completely.",
+        clientImage: "/placeholder.svg?height=100&width=100",
+      },
+      {
+        client: "Carlos Martinez",
+        business: "Martinez Barbershop",
+        improvement: "60%",
+        metric: "Fewer No-Shows",
+        quote: "Automated reminders have dramatically reduced no-shows.",
+        clientImage: "/placeholder.svg?height=100&width=100",
+      },
+      {
+        client: "Amy Thompson",
+        business: "Thompson Dental",
+        improvement: "300%",
+        metric: "After-Hours Bookings",
+        quote: "Patients love being able to book appointments anytime.",
+        clientImage: "/placeholder.svg?height=100&width=100",
+      },
+    ],
+  },
+  "review-management": {
+    results: [
+      {
+        client: "Robert Brown",
+        business: "Brown's Roofing",
+        improvement: "4.8/5",
+        metric: "Average Star Rating",
+        quote: "Our online reputation has never been better.",
+        clientImage: "/placeholder.svg?height=100&width=100",
+      },
+      {
+        client: "Nicole Davis",
+        business: "Davis Pet Grooming",
+        improvement: "500%",
+        metric: "More Reviews",
+        quote:
+          "The review system makes it easy for happy customers to leave feedback.",
+        clientImage: "/placeholder.svg?height=100&width=100",
+      },
+      {
+        client: "James Wilson",
+        business: "Wilson's Appliance Repair",
+        improvement: "90%",
+        metric: "Positive Review Rate",
+        quote: "Almost all our reviews are 5 stars now thanks to the system.",
+        clientImage: "/placeholder.svg?height=100&width=100",
+      },
+    ],
+  },
 };
 
-export default ResultsPage;
+const industryBreakdown = [
+  {
+    name: "Plumbing & HVAC",
+    description: "Emergency services with high-value jobs",
+    icon: Zap,
+    clientCount: 85,
+    avgResults: [
+      { metric: "Lead Increase", value: "+280%" },
+      { metric: "Revenue Growth", value: "+190%" },
+      { metric: "Call Volume", value: "+350%" },
+    ],
+  },
+  {
+    name: "Beauty & Wellness",
+    description: "Appointment-based businesses",
+    icon: Star,
+    clientCount: 120,
+    avgResults: [
+      { metric: "Online Bookings", value: "+400%" },
+      { metric: "No-Show Reduction", value: "-65%" },
+      { metric: "Customer Retention", value: "+45%" },
+    ],
+  },
+  {
+    name: "Home Services",
+    description: "Contractors and repair services",
+    icon: Target,
+    clientCount: 95,
+    avgResults: [
+      { metric: "Project Inquiries", value: "+250%" },
+      { metric: "Average Job Value", value: "+30%" },
+      { metric: "Repeat Customers", value: "+60%" },
+    ],
+  },
+];
+
+const guarantees = [
+  {
+    title: "Results Guarantee",
+    description:
+      "See measurable improvement in 90 days or we work for free until you do.",
+    icon: TrendingUp,
+  },
+  {
+    title: "Money-Back Promise",
+    description:
+      "Not satisfied? Get a full refund within 30 days, no questions asked.",
+    icon: DollarSign,
+  },
+  {
+    title: "Ongoing Support",
+    description:
+      "We're here for the long haul with 24/7 support and regular optimizations.",
+    icon: Clock,
+  },
+];

@@ -49,9 +49,9 @@ export function SiteHeader() {
       <div className="container flex items-center justify-between">
         <div className="flex items-center">
           <Link to="/" className="flex items-center gap-2">
-            <div className="relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-lg bg-gradient-to-br from-purple-600 to-blue-600 text-white">
+            <div className="relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-lg bg-linear-to-br from-purple-600 to-blue-600 text-white">
               <span className="relative z-10 text-xl font-bold">W</span>
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.4)_0%,_transparent_70%)]"></div>
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.4)_0%,transparent_70%)]"></div>
             </div>
             <span className="text-xl font-bold tracking-tight">
               web<span className="text-gradient">undance</span>
@@ -78,7 +78,7 @@ export function SiteHeader() {
                     {item.name}
                     <span
                       className={cn(
-                        "absolute bottom-0 left-0 h-0.5 w-full scale-x-0 transform bg-gradient-to-r from-purple-600 to-blue-600 transition-transform duration-200 ease-out group-hover:scale-x-100",
+                        "absolute bottom-0 left-0 h-0.5 w-full scale-x-0 transform bg-linear-to-r from-purple-600 to-blue-600 transition-transform duration-200 ease-out group-hover:scale-x-100",
                         isActive && "scale-x-100"
                       )}
                     ></span>
@@ -112,7 +112,7 @@ export function SiteHeader() {
 
           <Button
             asChild
-            className="bg-gradient-to-r from-purple-600 to-blue-600 text-white"
+            className="bg-linear-to-r from-purple-600 to-blue-600 text-white"
           >
             <Link to="/contact">Get Started</Link>
           </Button>
@@ -145,9 +145,9 @@ export function SiteHeader() {
               className="flex items-center gap-2"
               onClick={() => setMobileMenuOpen(false)}
             >
-              <div className="relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-lg bg-gradient-to-br from-purple-600 to-blue-600 text-white">
+              <div className="relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-lg bg-linear-to-br from-purple-600 to-blue-600 text-white">
                 <span className="relative z-10 text-xl font-bold">W</span>
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(255,255,255,0.4)_0%,_transparent_70%)]"></div>
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.4)_0%,transparent_70%)]"></div>
               </div>
               <span className="text-xl font-bold tracking-tight">
                 web<span className="text-gradient">undance</span>
@@ -172,14 +172,14 @@ export function SiteHeader() {
                   className={cn(
                     "block rounded-lg px-4 py-3 text-base font-medium transition-colors",
                     isActive
-                      ? "bg-gradient-to-r from-purple-600/10 to-blue-600/10 text-foreground"
+                      ? "bg-linear-to-r from-purple-600/10 to-blue-600/10 text-foreground"
                       : "text-muted-foreground hover:bg-muted hover:text-foreground"
                   )}
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {item.name}
                   {isActive && (
-                    <span className="ml-2 inline-block h-1.5 w-1.5 rounded-full bg-gradient-to-r from-purple-600 to-blue-600"></span>
+                    <span className="ml-2 inline-block h-1.5 w-1.5 rounded-full bg-linear-to-r from-purple-600 to-blue-600"></span>
                   )}
                 </Link>
               );
@@ -213,7 +213,7 @@ export function SiteHeader() {
           <div className="py-6">
             <Button
               asChild
-              className="w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white"
+              className="w-full bg-linear-to-r from-purple-600 to-blue-600 text-white"
               onClick={() => setMobileMenuOpen(false)}
             >
               <Link to="/contact">Get Started</Link>

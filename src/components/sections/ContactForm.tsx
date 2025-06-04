@@ -107,7 +107,7 @@ function ContactForm() {
   return (
     <div className="overflow-hidden rounded-lg border border-border bg-card shadow-lg">
       <div className="grid gap-6 md:grid-cols-2">
-        <div className="relative bg-gradient-to-br from-purple-600 to-blue-600 p-8 text-white md:p-12">
+        <div className="relative bg-linear-to-br from-purple-600 to-blue-600 p-8 text-white md:p-12">
           <div className="absolute inset-0 bg-[url('/placeholder.svg?height=600&width=800')] opacity-10 mix-blend-overlay"></div>
           <div className="relative z-10">
             <h2 className="text-2xl font-bold md:text-3xl">
