@@ -27,7 +27,7 @@ export default function HomePage() {
   return (
     <>
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-white to-slate-50 dark:from-gray-900 dark:to-gray-950">
+      <section className="relative overflow-hidden bg-linear-to-b from-white to-slate-50 dark:from-gray-900 dark:to-gray-950">
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute -left-[10%] top-[10%] h-[500px] w-[500px] rounded-full bg-purple-600/5 blur-3xl"></div>
           <div className="absolute -right-[10%] top-[40%] h-[400px] w-[400px] rounded-full bg-blue-600/5 blur-3xl"></div>
@@ -35,7 +35,7 @@ export default function HomePage() {
         <div className="container relative z-10 py-20 md:py-28 lg:py-32">
           <div className="mx-auto max-w-4xl text-center">
             <div className="mb-6 inline-flex items-center rounded-full border border-border bg-background px-3 py-1 text-sm">
-              <span className="mr-2 rounded-full bg-gradient-to-r from-purple-600 to-blue-600 px-2 py-0.5 text-xs font-semibold text-white">
+              <span className="mr-2 rounded-full bg-linear-to-r from-purple-600 to-blue-600 px-2 py-0.5 text-xs font-semibold text-white">
                 New
               </span>
               <span className="text-muted-foreground">
@@ -56,7 +56,7 @@ export default function HomePage() {
               <Button
                 asChild
                 size="lg"
-                className="bg-gradient-to-r from-purple-600 to-blue-600 text-white"
+                className="bg-linear-to-r from-purple-600 to-blue-600 text-white"
               >
                 <NavLink to="/contact">Get Your Free Quote</NavLink>
               </Button>
@@ -70,7 +70,7 @@ export default function HomePage() {
 
             {/* Hero Image */}
             <div className="relative mt-16">
-              <div className="absolute -inset-0.5 rounded-xl bg-gradient-to-r from-purple-600 to-blue-600 opacity-75 blur-sm"></div>
+              <div className="absolute -inset-0.5 rounded-xl bg-linear-to-r from-purple-600 to-blue-600 opacity-75 blur-xs"></div>
               <div className="relative overflow-hidden rounded-xl border border-border bg-background shadow-xl">
                 <img
                   src="/placeholder.svg?height=600&width=1200"
@@ -124,7 +124,7 @@ export default function HomePage() {
                 className="group overflow-hidden border-border transition-all hover:shadow-md"
               >
                 <CardContent className="p-6">
-                  <div className="mb-4 inline-flex rounded-lg bg-gradient-to-br from-purple-600/10 to-blue-600/10 p-3">
+                  <div className="mb-4 inline-flex rounded-lg bg-linear-to-br from-purple-600/10 to-blue-600/10 p-3">
                     <service.icon className="h-6 w-6 text-gradient" />
                   </div>
                   <h3 className="mb-2 text-xl font-bold">{service.title}</h3>
@@ -178,7 +178,7 @@ export default function HomePage() {
                       }`}
                     >
                       <div
-                        className={`mb-4 inline-flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-purple-600 to-blue-600 text-xl font-bold text-white`}
+                        className={`mb-4 inline-flex h-12 w-12 items-center justify-center rounded-full bg-linear-to-br from-purple-600 to-blue-600 text-xl font-bold text-white`}
                       >
                         {i + 1}
                       </div>
@@ -189,7 +189,7 @@ export default function HomePage() {
                     </div>
                   </div>
                   <div className="absolute left-1/2 top-0 flex -translate-x-1/2 transform items-center justify-center md:relative md:left-auto md:top-auto md:w-1/2 md:translate-x-0">
-                    <div className="z-10 h-8 w-8 rounded-full border-4 border-background bg-gradient-to-br from-purple-600 to-blue-600"></div>
+                    <div className="z-10 h-8 w-8 rounded-full border-4 border-background bg-linear-to-br from-purple-600 to-blue-600"></div>
                   </div>
                 </div>
               ))}
@@ -248,7 +248,7 @@ export default function HomePage() {
       </section>
 
       {/* Stats Section */}
-      <section className="bg-gradient-to-br from-purple-600 to-blue-600 py-20 text-white md:py-28">
+      <section className="bg-linear-to-br from-purple-600 to-blue-600 py-20 text-white md:py-28">
         <div className="container">
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
             {stats.map((stat) => (
@@ -297,7 +297,7 @@ export default function HomePage() {
           <div className="mt-16 flex justify-center">
             <div className="max-w-lg">
               <div className="relative mb-6 overflow-hidden rounded-xl">
-                <div className="aspect-[3/4] bg-muted">
+                <div className="aspect-3/4 bg-muted">
                   <img
                     src="/placeholder.svg?height=400&width=300"
                     alt="Mike, Webundance Founder"
@@ -347,8 +347,8 @@ export default function HomePage() {
               <div className="mt-8 space-y-6">
                 {benefits.map((benefit) => (
                   <div key={benefit.title} className="flex gap-4">
-                    <div className="flex-shrink-0">
-                      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-purple-600/10 to-blue-600/10">
+                    <div className="shrink-0">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-linear-to-br from-purple-600/10 to-blue-600/10">
                         <CheckCircle className="h-5 w-5 text-gradient" />
                       </div>
                     </div>
@@ -365,7 +365,7 @@ export default function HomePage() {
               <div className="mt-10">
                 <Button
                   asChild
-                  className="bg-gradient-to-r from-purple-600 to-blue-600 text-white"
+                  className="bg-linear-to-r from-purple-600 to-blue-600 text-white"
                 >
                   <NavLink to="/contact">Get Started Today</NavLink>
                 </Button>
@@ -373,7 +373,7 @@ export default function HomePage() {
             </div>
 
             <div className="relative">
-              <div className="absolute -inset-4 rounded-xl bg-gradient-to-r from-purple-600/20 to-blue-600/20 opacity-50 blur-xl"></div>
+              <div className="absolute -inset-4 rounded-xl bg-linear-to-r from-purple-600/20 to-blue-600/20 opacity-50 blur-xl"></div>
               <div className="relative aspect-square overflow-hidden rounded-xl border border-border bg-background">
                 <img
                   src="/placeholder.svg?height=800&width=800"
@@ -383,7 +383,7 @@ export default function HomePage() {
               </div>
               <div className="absolute -bottom-6 -right-6 rounded-xl border border-border bg-background p-6 shadow-xl">
                 <div className="flex items-center gap-4">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-purple-600 to-blue-600 text-white">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-linear-to-br from-purple-600 to-blue-600 text-white">
                     <Rocket className="h-6 w-6" />
                   </div>
                   <div>
@@ -461,7 +461,7 @@ export default function HomePage() {
       {/* CTA Section */}
       <section className="py-20 md:py-28">
         <div className="container">
-          <div className="overflow-hidden rounded-2xl bg-gradient-to-br from-purple-600 to-blue-600 shadow-xl">
+          <div className="overflow-hidden rounded-2xl bg-linear-to-br from-purple-600 to-blue-600 shadow-xl">
             <div className="relative px-6 py-12 sm:px-12 sm:py-16 md:px-16 md:py-20 lg:px-20">
               <div className="absolute -right-10 -top-10 h-64 w-64 rounded-full bg-white/10 blur-3xl"></div>
               <div className="absolute -bottom-10 -left-10 h-64 w-64 rounded-full bg-white/10 blur-3xl"></div>
