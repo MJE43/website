@@ -1,4 +1,4 @@
-import Link from "next/link"
+import { NavLink } from "react-router-dom"
 import { CheckCircle, Star } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -92,7 +92,7 @@ export function PricingCards() {
               className={`w-full ${plan.popular ? "bg-gradient-to-r from-purple-600 to-blue-600 text-white" : ""}`}
               variant={plan.popular ? "default" : "outline"}
             >
-              <Link href="/contact">{plan.cta}</Link>
+              <NavLink to="/contact">{plan.cta}</NavLink>
             </Button>
 
             <div className="text-center text-xs text-muted-foreground">No setup fees • 30-day money back guarantee</div>
