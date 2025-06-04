@@ -11,19 +11,16 @@ export interface ContactFormData {
 }
 
 export async function submitContactForm(data: ContactFormData): Promise<void> {
-  // Simulate API call delay
-  await new Promise((resolve) => setTimeout(resolve, 1000));
-  
-  // Log the form data for development purposes
-  console.log('Contact form submitted:', data);
-  
-  // In a real implementation, this would:
-  // 1. Validate the data server-side
-  // 2. Send email notification
-  // 3. Store in database
-  // 4. Return success/error response
-  
-  // For now, we'll just simulate success
-  // Uncomment the line below to simulate an error for testing
-  // throw new Error('Simulated submission error');
-} 
+  const endpoint = 'https://formspree.io/f/xdkzkdnk';
+
+  const response = await fetch(endpoint, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  });
+
+  if (!response.ok) {
+    const message = await response.text();
+    throw new Error(message || 'Failed to submit form');
+  }
+}

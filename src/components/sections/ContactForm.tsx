@@ -72,7 +72,11 @@ function ContactForm() {
       form.reset();
     } catch (err) {
       console.error("Form submission error:", err);
-      setError("Something went wrong. Please try again later.");
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError("Something went wrong. Please try again later.");
+      }
     } finally {
       setIsSubmitting(false);
     }
