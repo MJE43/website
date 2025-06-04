@@ -5,12 +5,12 @@ import {
   CheckCircle,
   ChevronRight,
   Code,
-  Cpu,
   Globe,
   Layers,
-  Lightbulb,
   Rocket,
-  Users,
+  Search,
+  Settings,
+  ShoppingCart,
 } from "lucide-react";
 
 import { Button } from "../components/ui/button";
@@ -49,8 +49,9 @@ export default function HomePage() {
               experiences
             </h1>
             <p className="mb-10 text-xl text-muted-foreground md:text-2xl">
-              Transforming ideas into powerful web solutions that drive growth
-              and elevate your brand in the digital landscape.
+              Serving small businesses in Tucson and surrounding Arizona areas
+              with powerful web solutions that drive local growth and online
+              success.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <Button
@@ -58,11 +59,11 @@ export default function HomePage() {
                 size="lg"
                 className="bg-gradient-to-r from-purple-600 to-blue-600 text-white"
               >
-                <NavLink to="/contact">Start Your Project</NavLink>
+                <NavLink to="/contact">Get Your Free Quote</NavLink>
               </Button>
               <Button asChild variant="outline" size="lg">
                 <NavLink to="/services">
-                  Explore My Services
+                  See How I Can Help
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </NavLink>
               </Button>
@@ -91,7 +92,7 @@ export default function HomePage() {
             {/* Trusted By */}
             <div className="mt-20">
               <p className="mb-6 text-sm font-medium uppercase tracking-wider text-muted-foreground">
-                Trusted by
+                Trusted by Local Tucson Businesses
               </p>
               <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-8">
                 {[1, 2, 3, 4, 5].map((i) => (
@@ -112,8 +113,8 @@ export default function HomePage() {
               <span className="text-gradient">Services</span>
             </h2>
             <p className="mt-4 text-xl text-muted-foreground">
-              I offer end-to-end solutions to help your business thrive in the
-              digital world.
+              I offer end-to-end solutions to help Tucson area businesses thrive
+              online and attract more local customers.
             </p>
           </div>
 
@@ -156,8 +157,8 @@ export default function HomePage() {
               My Proven <span className="text-gradient">Process</span>
             </h2>
             <p className="mt-4 text-xl text-muted-foreground">
-              A systematic approach to delivering exceptional results for every
-              project.
+              Here's how I work with you to create a website that grows your
+              business.
             </p>
           </div>
 
@@ -216,9 +217,8 @@ export default function HomePage() {
               <div className="mb-8 flex justify-center">
                 <TabsList>
                   <TabsTrigger value="all">All Projects</TabsTrigger>
-                  <TabsTrigger value="web">Web Development</TabsTrigger>
-                  <TabsTrigger value="app">App Development</TabsTrigger>
-                  <TabsTrigger value="ecommerce">E-commerce</TabsTrigger>
+                  <TabsTrigger value="web">Websites</TabsTrigger>
+                  <TabsTrigger value="ecommerce">Online Stores</TabsTrigger>
                 </TabsList>
               </div>
               <TabsContent value="all">
@@ -227,11 +227,6 @@ export default function HomePage() {
               <TabsContent value="web">
                 <ProjectShowcase
                   projects={projects.filter((p) => p.category === "web")}
-                />
-              </TabsContent>
-              <TabsContent value="app">
-                <ProjectShowcase
-                  projects={projects.filter((p) => p.category === "app")}
                 />
               </TabsContent>
               <TabsContent value="ecommerce">
@@ -345,8 +340,9 @@ export default function HomePage() {
                 Why Choose <span className="text-gradient">Webundance</span>
               </h2>
               <p className="mt-4 text-xl text-muted-foreground">
-                I combine technical expertise with creative excellence to
-                deliver solutions that exceed expectations.
+                As your local Tucson web development specialist, I combine
+                technical expertise with creative excellence to deliver
+                solutions that exceed expectations.
               </p>
 
               <div className="mt-8 space-y-6">
@@ -372,7 +368,7 @@ export default function HomePage() {
                   asChild
                   className="bg-gradient-to-r from-purple-600 to-blue-600 text-white"
                 >
-                  <NavLink to="/process">Learn About My Process</NavLink>
+                  <NavLink to="/contact">Get Started Today</NavLink>
                 </Button>
               </div>
             </div>
@@ -413,7 +409,7 @@ export default function HomePage() {
             </h2>
             <p className="mt-4 text-xl text-muted-foreground">
               Stay updated with my latest thoughts on technology, design, and
-              digital strategy.
+              digital strategies specifically for Tucson small businesses.
             </p>
           </div>
 
@@ -477,7 +473,7 @@ export default function HomePage() {
                 </h2>
                 <p className="mt-6 text-xl text-blue-100">
                   Let's collaborate to create something extraordinary that
-                  drives real results for your business.
+                  drives real results for your Tucson business.
                 </p>
                 <div className="mt-10 flex flex-wrap justify-center gap-4">
                   <Button
@@ -485,7 +481,7 @@ export default function HomePage() {
                     size="lg"
                     className="bg-white text-purple-600 hover:bg-white/90"
                   >
-                    <NavLink to="/contact">Start Your Project</NavLink>
+                    <NavLink to="/contact">Schedule Free Consultation</NavLink>
                   </Button>
                   <Button
                     asChild
@@ -494,7 +490,7 @@ export default function HomePage() {
                     className="border-white text-white hover:bg-white/10"
                   >
                     <NavLink to="/services">
-                      Explore My Services
+                      See How I Can Help
                       <ArrowRight className="ml-2 h-4 w-4" />
                     </NavLink>
                   </Button>
@@ -511,150 +507,143 @@ export default function HomePage() {
 // Data
 const services = [
   {
-    title: "Web Development",
+    title: "Custom Website Development",
     description:
-      "Custom websites and web applications built with the latest technologies for optimal performance.",
+      "Professional websites designed specifically for your local business. Perfect for plumbers, electricians, restaurants, and service providers who need a strong online presence.",
     icon: Globe,
     link: "/services/web-development",
   },
   {
-    title: "Mobile App Development",
+    title: "Professional Web Design",
     description:
-      "Native and cross-platform mobile applications that deliver exceptional user experiences.",
-    icon: Cpu,
-    link: "/services/app-development",
-  },
-  {
-    title: "UI/UX Design",
-    description:
-      "User-centered design that creates intuitive, engaging, and visually stunning interfaces.",
+      "Beautiful, mobile-friendly designs that convert visitors into customers. Easy to navigate for your clients and built to showcase your work effectively.",
     icon: Layers,
-    link: "/services/ui-ux-design",
+    link: "/services/web-design",
   },
   {
-    title: "E-commerce Solutions",
+    title: "Small Business E-commerce",
     description:
-      "Scalable online stores that drive sales and provide seamless shopping experiences.",
-    icon: Rocket,
+      "Simple online stores that are easy to manage and help you sell your products 24/7. Perfect for retail shops, bakeries, and local artisans.",
+    icon: ShoppingCart,
     link: "/services/ecommerce",
   },
   {
-    title: "Digital Strategy",
+    title: "SEO & Local Marketing",
     description:
-      "Strategic planning and consulting to help you achieve your digital transformation goals.",
-    icon: Lightbulb,
-    link: "/services/digital-strategy",
+      "Get found by customers in Tucson when they search for your services. Improve your Google rankings and drive more local business through your door.",
+    icon: Search,
+    link: "/services/seo-marketing",
   },
   {
-    title: "Team Augmentation",
+    title: "Website Maintenance & Support",
     description:
-      "Skilled developers and designers to supplement your team and accelerate your projects.",
-    icon: Users,
-    link: "/services/team-augmentation",
+      "Keep your website running smoothly with regular updates, backups, and security monitoring. Focus on your business while I handle the technical details.",
+    icon: Settings,
+    link: "/services/maintenance",
   },
 ];
 
 const process = [
   {
-    title: "Discovery & Planning",
+    title: "Getting to Know Your Business",
     description:
-      "I start by understanding your business goals, target audience, and project requirements to create a comprehensive roadmap.",
+      "I learn about your business, who your customers are, and what you want your website to accomplish so we can plan the perfect solution.",
   },
   {
-    title: "Design & Prototyping",
+    title: "Creating Your Website Design",
     description:
-      "I create wireframes and interactive prototypes to visualize the user experience before development begins.",
+      "I design your website layout and show you exactly how it will look and work before building it, so you can see and approve everything first.",
   },
   {
-    title: "Development & Testing",
+    title: "Building Your Website",
     description:
-      "I build your solution using the latest technologies, with rigorous testing at every stage to ensure quality.",
+      "I build your website and test everything thoroughly to make sure it works perfectly on all devices and browsers before you go live.",
   },
   {
-    title: "Launch & Support",
+    title: "Launch & Ongoing Support",
     description:
-      "I deploy your project and provide ongoing support and maintenance to ensure it continues to perform optimally.",
+      "I launch your website and provide ongoing help with updates, maintenance, and any questions you have so your site keeps running smoothly.",
   },
 ];
 
 const projects = [
   {
-    title: "Fintech Dashboard",
+    title: "Mike's Plumbing Services",
     description:
-      "A comprehensive financial management platform with real-time analytics and reporting.",
+      "Professional plumbing website featuring service pages, emergency contact forms, and customer testimonials. Increased local leads by 40% in first three months.",
     image: "/placeholder.svg?height=600&width=800",
     category: "web",
-    link: "/results/fintech-dashboard",
+    link: "/results/mikes-plumbing",
   },
   {
-    title: "E-commerce Platform",
+    title: "Desert Electric Tucson",
     description:
-      "A scalable online store with advanced product filtering and personalized recommendations.",
+      "Local electrician website with 24/7 emergency services, project gallery, and online scheduling. Improved Google ranking from page 3 to top 5 results.",
+    image: "/placeholder.svg?height=600&width=800",
+    category: "web",
+    link: "/results/desert-electric",
+  },
+  {
+    title: "Tucson Cuts Barber Shop",
+    description:
+      "Modern barber shop website with online booking system, service menu, and staff profiles. Streamlined appointment scheduling and reduced no-shows by 25%.",
+    image: "/placeholder.svg?height=600&width=800",
+    category: "web",
+    link: "/results/tucson-cuts",
+  },
+  {
+    title: "Sonoran Bistro",
+    description:
+      "Restaurant website featuring interactive menu, location info, and reservation system. Boosted online orders by 60% during the pandemic.",
+    image: "/placeholder.svg?height=600&width=800",
+    category: "web",
+    link: "/results/sonoran-bistro",
+  },
+  {
+    title: "Desert Bloom Boutique",
+    description:
+      "Local fashion boutique with integrated e-commerce store, inventory management, and customer loyalty program. Online sales now represent 35% of total revenue.",
     image: "/placeholder.svg?height=600&width=800",
     category: "ecommerce",
-    link: "/results/ecommerce-platform",
+    link: "/results/desert-bloom-boutique",
   },
   {
-    title: "Health & Fitness App",
+    title: "Arizona Home Services",
     description:
-      "A mobile application for tracking workouts, nutrition, and health metrics with social features.",
-    image: "/placeholder.svg?height=600&width=800",
-    category: "app",
-    link: "/results/health-fitness-app",
-  },
-  {
-    title: "Real Estate Portal",
-    description:
-      "A property listing and management system with virtual tours and mortgage calculators.",
+      "General contractor website with project portfolio, service areas, and estimate request forms. Generated 50+ qualified leads in first quarter.",
     image: "/placeholder.svg?height=600&width=800",
     category: "web",
-    link: "/results/real-estate-portal",
-  },
-  {
-    title: "Travel Booking Platform",
-    description:
-      "An end-to-end travel booking solution with itinerary planning and real-time availability.",
-    image: "/placeholder.svg?height=600&width=800",
-    category: "web",
-    link: "/results/travel-booking-platform",
-  },
-  {
-    title: "Food Delivery App",
-    description:
-      "A mobile app connecting users with local restaurants for seamless food ordering and delivery.",
-    image: "/placeholder.svg?height=600&width=800",
-    category: "app",
-    link: "/results/food-delivery-app",
+    link: "/results/arizona-home-services",
   },
 ];
 
 const stats = [
-  { value: "200+", label: "Projects Completed" },
-  { value: "50+", label: "Happy Clients" },
-  { value: "15+", label: "Industry Awards" },
-  { value: "99%", label: "Client Satisfaction" },
+  { value: "25+", label: "Projects Completed" },
+  { value: "98%", label: "Client Satisfaction" },
+  { value: "25%", label: "Avg Traffic Increase" },
+  { value: "40%", label: "Avg Ranking Boost" },
 ];
 
 const testimonials = [
   {
     quote:
-      "Working with Webundance transformed our business. Mike delivered a solution that exceeded our expectations and has significantly improved our customer engagement.",
-    author: "Sarah Johnson",
-    title: "CEO, TechInnovate",
+      "Mike built our plumbing website and we started getting calls from new customers almost immediately. He made everything so easy to understand and manage. Our phone hasn't stopped ringing!",
+    author: "Carlos Rodriguez",
+    title: "Owner, Rodriguez Plumbing",
     image: "/placeholder.svg?height=100&width=100",
   },
   {
     quote:
-      "Mike at Webundance is exceptional. He took the time to understand our unique challenges and delivered a custom solution that has streamlined our operations.",
-    author: "Michael Chen",
-    title: "CTO, GrowthScale",
+      "After Mike redesigned our cafe website, we saw a 50% increase in online orders. He really understood what our customers needed and made it simple for them to find us and place orders.",
+    author: "Linda Davis",
+    title: "Owner, Desert Bloom Cafe",
     image: "/placeholder.svg?height=100&width=100",
   },
   {
     quote:
-      "I've worked with many development agencies, but Webundance stands out for their technical expertise, creativity, and commitment to delivering quality work on time.",
-    author: "Emily Rodriguez",
-    title: "Marketing Director, BrandForward",
+      "Best investment I've made for my electrical business. Mike got us to the top of Google searches and now I'm booked solid. He explains everything in plain English - no tech talk.",
+    author: "James Wilson",
+    title: "Owner, Wilson Electric",
     image: "/placeholder.svg?height=100&width=100",
   },
 ];
@@ -678,7 +667,7 @@ const benefits = [
   {
     title: "Long-Term Partnership",
     description:
-      "I build lasting relationships with my clients, providing ongoing support and strategic guidance.",
+      "I build lasting relationships with local Tucson businesses, providing ongoing support and strategic guidance.",
   },
 ];
 
