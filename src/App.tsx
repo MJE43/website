@@ -7,6 +7,7 @@ import ServicesPage from './pages/ServicesPage';
 import ProcessPage from './pages/ProcessPage';
 import ResultsPage from './pages/ResultsPage';
 import ContactPage from './pages/ContactPage';
+import NotFoundPage from './pages/NotFoundPage';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
             <Route path="/process" element={<ProcessPage />} />
             <Route path="/results" element={<ResultsPage />} />
             <Route path="/contact" element={<ContactPage />} />
+            <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </main>
         <Footer />
