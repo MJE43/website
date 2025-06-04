@@ -1,4 +1,3 @@
-import Image from "next/image"
 import { MapPin, TrendingUp } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 
@@ -29,7 +28,7 @@ export function LocalBusinessShowcase({ industry, businesses }: LocalBusinessSho
         {businesses.map((business) => (
           <Card key={business.name} className="overflow-hidden">
             <div className="aspect-video bg-muted">
-              <Image
+              <img
                 src={business.image || "/placeholder.svg"}
                 alt={business.name}
                 width={400}
